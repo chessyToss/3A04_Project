@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ColorFinder</string>
+    <string name="text">Welcome to ColorFinder</string>
+    <string name="uploadPhoto">Upload A Photo</string>
+    <string name="takePhoto">Take A Photo</string>
+</resources>
