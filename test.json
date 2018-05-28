@@ -1,0 +1,3766 @@
+{
+  "openapi": "3.0.1",
+  "servers": [
+    {
+      "url": "https://10.10.5.1/cpi/shoppingCartManagement/v1"
+    }
+  ],
+  "info": {
+    "description": "The Shopping Cart Management interface is a set of REST resources that supports the creation of a shopping cart. The interface helps the customer browse the product offerings.",
+    "version": "1.28.0",
+    "title": "CPI Shopping Cart Management REST Interface",
+    "license": {
+      "name": "Copyright (c) 2016 Telefonaktiebolaget LM Ericsson, Sweden. All rights reserved."
+    }
+  },
+  "tags": [
+    {
+      "name": "Shopping Cart",
+      "description": "CPI supports authorization and permissions for shopping cart service operations. Thus, user can perform service operations based on a specific authorization and permission set to on the user role. Service operations are performed based on the following authorization model."
+    }
+  ],
+  "paths": {
+    "/shoppingCart": {
+      "post": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This operation creates a shopping cart.",
+        "operationId": "shoppingCart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShoppingCart"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingCart/{id}": {
+      "get": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This operation reads a Shopping Cart based on an ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This operation completely updates a Shopping Cart.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShoppingCart"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This operation partially updates a Shopping Cart.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShoppingCart"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This operation deletes a shopping cart.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/shoppingCart/{id}/cartItem/{itemId}": {
+      "get": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This operation reads a Shopping Cart Item based on an ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "ID of a Shopping Cart Item",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProductCartItem"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ContractCartItem"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingCart/{id}/cancel": {
+      "post": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This task cancels the shopping cart by triggering the Cancel Manage Shopping Cart BI task using Orchestration Service.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskInputMandatoryNote"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingCart/{id}/finalize": {
+      "post": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This task validates the shopping cart and triggers the Finalize Manage Shopping Cart Business Interaction task in Orchestration Service.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingCart/{id}/loadInstalledBase": {
+      "post": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This task triggers the Load Installed Base from an external system when customer information is owned by an external system. By loading the installed base, all the information regarding a customer such as contracts, products, services, and resources associated to a customer can be found. This is done by triggering the Manage Shopping Cart Business Interaction Load Installed Base task in Orchestration Service.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/shoppingCart/{id}/price": {
+      "post": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This task gets the shopping cart items prices based on its contents. This is done by triggering the Price task from Manage Shopping Cart Business Interaction in Orchestration Service. In case the cart is modified after pricing, this task will be performed again to update the prices.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskInputNote"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingCart/{id}/submit": {
+      "post": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This task has been created as a placeholder for SI customization to implement. Out-of-the-box behavior is just to return the shopping cart without any effects.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppingCart/{id}/validate": {
+      "post": {
+        "tags": [
+          "Shopping Cart"
+        ],
+        "summary": "",
+        "description": "This operation validates the contents of the shopping cart based on the catalog validation rules. This is done by triggering the Validate task for Manage Shopping Cart Business Interaction in Orchestration Service. In case the shopping cart has the installed base, for existing customers, the validation considers the installed base compatibility and the context with the newly added items. interactionPhase determines the level of validation to be triggered. This task can be performed multiple times.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskInputNote"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of a Shopping Cart",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingCart"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Action": {
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/Reason"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "currentLifeCycleState": {
+            "type": "string"
+          }
+        }
+      },
+      "Attachment": {
+        "required": [
+          "attachmentId",
+          "uri"
+        ],
+        "properties": {
+          "attachmentId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "type": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          },
+          "classifierTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Bucket": {
+        "required": [
+          "measure",
+          "unitOfMeasure"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "isBCAligned": {
+            "$ref": "#/components/schemas/FlagValue"
+          },
+          "providerProduct": {
+            "type": "string"
+          },
+          "measure": {
+            "$ref": "#/components/schemas/Measure"
+          },
+          "unitOfMeasure": {
+            "$ref": "#/components/schemas/UnitOfMeasure"
+          },
+          "bucketValue": {
+            "type": "number"
+          },
+          "bucketType": {
+            "type": "string"
+          },
+          "thresholdValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ThresholdValue"
+            }
+          },
+          "resourceSpecification": {
+            "type": "string"
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusValue"
+            }
+          }
+        }
+      },
+      "CalendarEntry": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapElement"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "commonName": {
+            "type": "string"
+          },
+          "calendarEntryCategory": {
+            "type": "string"
+          },
+          "productRef": {
+            "type": "string"
+          },
+          "personalSchedule": {
+            "type": "object",
+            "properties": {
+              "scheduleSpecification": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "commonName": {
+                "type": "string"
+              },
+              "characteristics": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              }
+            }
+          },
+          "calendarEntryInfo": {
+            "type": "object",
+            "properties": {
+              "lastExecutionDate": {
+                "type": "string"
+              },
+              "nextExecutionDate": {
+                "type": "string"
+              }
+            }
+          },
+          "calendarEntryAction": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "payload": {
+                "type": "string"
+              },
+              "restOperation": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Cardinality": {
+        "properties": {
+          "min": {
+            "type": "integer"
+          },
+          "max": {
+            "type": "integer"
+          }
+        }
+      },
+      "CatalogDiscovery": {
+        "properties": {
+          "provideOnlyFeasible": {
+            "type": "boolean"
+          },
+          "provideFeasibleFailureReason": {
+            "type": "boolean"
+          },
+          "eligibilityDate": {
+            "type": "string"
+          },
+          "relatedBusinessInteractionRef": {
+            "type": "string"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PartyInfo"
+            }
+          },
+          "relatedEntity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedEntity"
+            }
+          },
+          "place": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlaceInfo"
+            }
+          },
+          "channel": {
+            "type": "string"
+          },
+          "filterCriterion": {
+            "type": "string"
+          },
+          "expand": {
+            "type": "string"
+          },
+          "qualificationType": {
+            "type": "string"
+          },
+          "productOfferingQualificationItem": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductOfferingQualificationItem"
+            }
+          },
+          "productCategoryQualificationItem": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryQualificationItem"
+            }
+          },
+          "contextSpecName": {
+            "type": "string"
+          },
+          "contextCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          }
+        }
+      },
+      "Characteristic": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/HumanReadableId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {},
+          "charSpecRef": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "configurable": {
+            "type": "boolean"
+          },
+          "mandatory": {
+            "type": "boolean"
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "personalized": {
+            "type": "boolean"
+          },
+          "valueInstances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicValue"
+            }
+          }
+        }
+      },
+      "CharacteristicLink": {
+        "properties": {
+          "charSpecId": {
+            "type": "string"
+          },
+          "entitySpecType": {
+            "type": "string"
+          },
+          "charSpecRef": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "CharacteristicRelationship": {
+        "properties": {
+          "relationType": {
+            "type": "string"
+          },
+          "sourceCharacteristicLink": {
+            "$ref": "#/components/schemas/CharacteristicLink"
+          },
+          "targetCharacteristicLink": {
+            "$ref": "#/components/schemas/CharacteristicLink"
+          },
+          "characteristicValueFilter": {
+            "type": "string"
+          },
+          "chracteristicValueFilterURI": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "CharacteristicSpecification": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/HumanReadableId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "valueType": {
+            "type": "string"
+          },
+          "maxCardinality": {
+            "type": "integer"
+          },
+          "minCardinality": {
+            "type": "integer"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "measure": {
+            "$ref": "#/components/schemas/Measure"
+          },
+          "isCalculated": {
+            "type": "boolean"
+          },
+          "canBeOverriden": {
+            "type": "boolean"
+          },
+          "configurable": {
+            "type": "boolean"
+          },
+          "mandatoy": {
+            "type": "boolean"
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "classifierTag": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "valueRegulator": {
+            "type": "string"
+          },
+          "characteristicValue": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSpecificationValue"
+            }
+          },
+          "referenceList": {
+            "$ref": "#/components/schemas/ReferenceListEntity"
+          },
+          "comprisedOf": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSpecification"
+            }
+          },
+          "characteristicRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicRelationship"
+            }
+          },
+          "customProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomProperty"
+            }
+          }
+        }
+      },
+      "CharacteristicSpecificationValue": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "displayValue": {
+            "type": "string"
+          },
+          "regularExpression": {
+            "type": "string"
+          },
+          "unitOfMeasure": {
+            "type": "string"
+          },
+          "isDefault": {
+            "type": "boolean"
+          },
+          "isDiscrete": {
+            "type": "boolean"
+          },
+          "valueType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "valueRange": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "valueFrom": {
+                  "type": "number"
+                },
+                "valueFromInclusive": {
+                  "type": "boolean"
+                },
+                "valueTo": {
+                  "type": "number"
+                },
+                "valueToInclusive": {
+                  "type": "boolean"
+                },
+                "rangeStep": {
+                  "type": "number"
+                },
+                "rangeInterval": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "characteristicValueLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          }
+        }
+      },
+      "CharacteristicValue": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionedValue"
+            }
+          },
+          "comprisedOf": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          }
+        }
+      },
+      "ConditionalPrice": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "characteristicCriterion": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapElement"
+            }
+          },
+          "concatenatedCharacteristicCriterion": {
+            "type": "string"
+          },
+          "unitOfMeasure": {
+            "$ref": "#/components/schemas/MeasuredQuantity"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Price"
+          }
+        }
+      },
+      "ContractCartItem": {
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "contract": {
+            "type": "object",
+            "properties": {
+              "contractSpecification": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "paymentContext": {
+                "type": "string"
+              },
+              "status": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              },
+              "entityAction": {
+                "$ref": "#/components/schemas/EntityAction"
+              },
+              "productReference": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Href"
+                }
+              },
+              "resource": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Href"
+                }
+              },
+              "relatedProductOfferItem": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalAssociation"
+                }
+              },
+              "calendarEntry": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CalendarEntry"
+                }
+              },
+              "characteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              }
+            }
+          },
+          "billingAccountAssignmentRuleRef": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "entityId": {
+            "type": "string"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "lastUpdatedDate": {
+            "type": "string"
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapElement"
+            }
+          },
+          "cartItemRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemRelationship"
+            }
+          }
+        }
+      },
+      "ContractQualificationItem": {
+        "properties": {
+          "contractSpecification": {
+            "$ref": "#/components/schemas/ContractSpecification"
+          }
+        }
+      },
+      "ContractSpecification": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/HumanReadableId"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "chracteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSpecification"
+            }
+          },
+          "entityActionAssociation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSpecification"
+            }
+          },
+          "type": {
+            "type": "string"
+          },
+          "contractType": {
+            "type": "string"
+          },
+          "contractSubType": {
+            "type": "string"
+          },
+          "lifeCycleStatus": {
+            "type": "string"
+          },
+          "family": {
+            "type": "string"
+          },
+          "resourceSpecificationRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          }
+        }
+      },
+      "Country": {
+        "properties": {
+          "country": {
+            "type": "string"
+          }
+        }
+      },
+      "CustomProperty": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "valueType": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array"
+          }
+        }
+      },
+      "DecimalValue": {
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        }
+      },
+      "DiscountTarget": {
+        "properties": {
+          "targetProductOffering": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "targetProductOfferItemId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "targetPoductOfferingPriceId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "discount": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "scope": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityAction": {
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          },
+          "currentLifeCycleState": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityAssociation": {
+        "required": [
+          "role",
+          "entitySpecificationRef",
+          "entityRef"
+        ],
+        "properties": {
+          "associationId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "role": {
+            "type": "string"
+          },
+          "entitySpecificationRef": {
+            "type": "string"
+          },
+          "entityRef": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityReference": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "relationType": {
+            "type": "string"
+          },
+          "entityRef": {
+            "type": "string"
+          },
+          "targetCardinality": {
+            "$ref": "#/components/schemas/Cardinality"
+          },
+          "sourceEntityRef": {
+            "type": "string"
+          },
+          "sourceCardinality": {
+            "$ref": "#/components/schemas/Cardinality"
+          }
+        }
+      },
+      "ExternalId": {
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "FeasibilityCheckResult": {
+        "properties": {
+          "result": {
+            "type": "string"
+          },
+          "stockAvailibilityResult": {
+            "type": "string"
+          },
+          "unAvailibilityReason": {
+            "type": "string"
+          }
+        }
+      },
+      "FlagValue": {
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "boolean"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        }
+      },
+      "GenericEntity": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "entitySpecification": {
+            "type": "string"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/HumanReadableId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "entityRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          }
+        }
+      },
+      "Href": {
+        "properties": {
+          "uri": {
+            "type": "string"
+          }
+        }
+      },
+      "HumanReadableId": {
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "Id": {
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "ItemError": {
+        "properties": {
+          "itemRef": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "installedBaseItemRef": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "uri": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "code": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string"
+          },
+          "reasonCode": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "unresolvedTarget": {
+            "$ref": "#/components/schemas/UnresolvedEntity"
+          },
+          "unresolvedSource": {
+            "$ref": "#/components/schemas/UnresolvedEntity"
+          }
+        }
+      },
+      "ItemPrice": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "humanReadableId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "subType": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "priceSubType": {
+            "type": "string"
+          },
+          "unitOfMeasure": {
+            "type": "string"
+          },
+          "allowanceUnit": {
+            "$ref": "#/components/schemas/MeasuredQuantity"
+          },
+          "discountTarget": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountTarget"
+            }
+          },
+          "isExternal": {
+            "type": "boolean"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "externalSystem": {
+            "type": "string"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "status": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Status"
+            }
+          },
+          "productOfferingPrice": {
+            "type": "string"
+          },
+          "lockDownDate": {
+            "type": "string"
+          },
+          "comprisedOf": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entityRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalAssociation"
+            }
+          },
+          "recurrenceFrequency": {
+            "type": "string"
+          },
+          "recurrencePeriod": {
+            "type": "string"
+          },
+          "isPriced": {
+            "type": "boolean"
+          },
+          "price": {
+            "$ref": "#/components/schemas/TMFPrice"
+          }
+        }
+      },
+      "ItemRelationship": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "type": {
+            "type": "string"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      },
+      "LocalAssociation": {
+        "required": [
+          "id",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "role": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "MapElement": {
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {}
+        }
+      },
+      "Measure": {
+        "properties": {
+          "measure": {
+            "type": "string"
+          }
+        }
+      },
+      "MeasuredQuantity": {
+        "properties": {
+          "measure": {
+            "$ref": "#/components/schemas/Measure"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/UnitOfMeasure"
+          }
+        }
+      },
+      "MediumCharacteristic": {
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string"
+          },
+          "faxNumber": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "postCode": {
+            "type": "string"
+          },
+          "stateOrProvince": {
+            "type": "string"
+          },
+          "street1": {
+            "type": "string"
+          },
+          "street2": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "Money": {
+        "properties": {
+          "unit": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        }
+      },
+      "Note": {
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      },
+      "PartyInfo": {
+        "properties": {
+          "entityRef": {
+            "type": "string"
+          },
+          "interactionRole": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapElement"
+            }
+          }
+        }
+      },
+      "PlaceInfo": {
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "postcode": {
+            "type": "string"
+          },
+          "locality": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "stateOrProvice": {
+            "type": "string"
+          },
+          "country": {
+            "$ref": "#/components/schemas/Country"
+          }
+        }
+      },
+      "Price": {
+        "properties": {
+          "taxIncludedAmount": {
+            "type": "number"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "percentage": {
+            "type": "number"
+          },
+          "amountType": {
+            "type": "string"
+          }
+        }
+      },
+      "PriceType": {
+        "properties": {
+          "priceType": {
+            "type": "string"
+          }
+        }
+      },
+      "Product": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusValue"
+            }
+          },
+          "action": {
+            "$ref": "#/components/schemas/Action"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "productSerialNumber": {
+            "type": "string"
+          },
+          "productOffering": {
+            "type": "string"
+          },
+          "lockDownDate": {
+            "type": "string"
+          },
+          "comprisedOf": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productBuckets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bucket"
+            }
+          },
+          "customerAccounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductPrice"
+            }
+          }
+        }
+      },
+      "ProductCartItem": {
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "itemPrice": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemPrice"
+            }
+          },
+          "productOffering": {
+            "$ref": "#/components/schemas/ProductOfferingRef"
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductRefOrValue"
+          },
+          "involvedPartyInteractionRole": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "discountedProductOfferItem": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalAssociation"
+            }
+          },
+          "involvedCustomerAccountInteractionRole": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "service": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TMFService"
+            }
+          },
+          "resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TMFResource"
+            }
+          },
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "entityId": {
+            "type": "string"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "lastUpdatedDate": {
+            "type": "string"
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapElement"
+            }
+          },
+          "cartItemRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemRelationship"
+            }
+          }
+        }
+      },
+      "ProductCategory": {
+        "properties": {
+          "Id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "Href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "isRoot": {
+            "type": "boolean"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "lastUpdate": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "subCategory": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductCategoryQualificationItem": {
+        "properties": {
+          "productCategory": {
+            "$ref": "#/components/schemas/ProductCategory"
+          },
+          "orderFeasibilityCheck": {
+            "$ref": "#/components/schemas/FeasibilityCheckResult"
+          }
+        }
+      },
+      "ProductOffering": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/HumanReadableId"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "family": {
+            "type": "string"
+          },
+          "salesCategory": {
+            "type": "string"
+          },
+          "productCategory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategory"
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "attachment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "offerType": {
+            "type": "string"
+          },
+          "offerSubType": {
+            "type": "string"
+          },
+          "isBundle": {
+            "type": "boolean"
+          },
+          "productOfferingPrice": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductOfferingPrice"
+            }
+          },
+          "bundledProductOffering": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          },
+          "productOfferingRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          },
+          "discountedProductOffering": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          },
+          "productSpecification": {
+            "$ref": "#/components/schemas/ProductSpecification"
+          }
+        }
+      },
+      "ProductOfferingPrice": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/HumanReadableId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "subType": {
+            "type": "string"
+          },
+          "priceType": {
+            "$ref": "#/components/schemas/PriceType"
+          },
+          "priceSubType": {
+            "type": "string"
+          },
+          "isCalculated": {
+            "type": "boolean"
+          },
+          "applyBeforeTax": {
+            "type": "boolean"
+          },
+          "isExternal": {
+            "type": "boolean"
+          },
+          "externalSystem": {
+            "type": "string"
+          },
+          "isPriced": {
+            "type": "boolean"
+          },
+          "unitOfMeasure": {
+            "$ref": "#/components/schemas/MeasuredQuantity"
+          },
+          "allowanceUnit": {
+            "$ref": "#/components/schemas/MeasuredQuantity"
+          },
+          "recurrencePeriod": {
+            "$ref": "#/components/schemas/RecurrencePeriod"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "conditionalPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConditionalPrice"
+            }
+          },
+          "productOfferAlteration": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConditionalPrice"
+            }
+          },
+          "discountTargets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountTarget"
+            }
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSpecification"
+            }
+          }
+        }
+      },
+      "ProductOfferingQualificationItem": {
+        "properties": {
+          "productOffering": {
+            "$ref": "#/components/schemas/ProductOffering"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "orderFeasibilityCheack": {
+            "$ref": "#/components/schemas/FeasibilityCheckResult"
+          }
+        }
+      },
+      "ProductOfferingRef": {
+        "required": [
+          "href"
+        ],
+        "properties": {
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductPrice": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/HumanReadableId"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusValue"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "productOfferingPrice": {
+            "type": "string"
+          },
+          "lockDownDate": {
+            "type": "string"
+          },
+          "comprisedOf": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExternalId"
+            }
+          },
+          "customerAccounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "relatedCalendarEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalAssociation"
+            }
+          },
+          "type": {
+            "type": "string"
+          },
+          "subType": {
+            "type": "string"
+          },
+          "priceType": {
+            "$ref": "#/components/schemas/PriceType"
+          },
+          "priceSubType": {
+            "type": "string"
+          },
+          "recurrenceFrequency": {
+            "type": "string"
+          },
+          "recurrencePeriod": {
+            "$ref": "#/components/schemas/RecurrencePeriod"
+          },
+          "allowanceUnit": {
+            "$ref": "#/components/schemas/MeasuredQuantity"
+          },
+          "discountTargets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscountTarget"
+            }
+          },
+          "entityRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalAssociation"
+            }
+          },
+          "isExternal": {
+            "type": "boolean"
+          },
+          "externalSystem": {
+            "type": "string"
+          },
+          "isPriced": {
+            "type": "boolean"
+          },
+          "unitOfMeasure": {
+            "$ref": "#/components/schemas/MeasuredQuantity"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Price"
+          }
+        }
+      },
+      "ProductRefOrValue": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Status"
+            }
+          },
+          "entityAction": {
+            "$ref": "#/components/schemas/EntityAction"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "productSerialNumber": {
+            "type": "string"
+          },
+          "involvedLocation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lockDownDate": {
+            "type": "string"
+          },
+          "comprisedOf": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Href"
+            }
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Href"
+            }
+          },
+          "productBuckets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bucket"
+            }
+          },
+          "customerAccounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalAssociation"
+            }
+          },
+          "relatedEntity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericEntity"
+            }
+          }
+        }
+      },
+      "ProductSpecification": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "humanReadableId": {
+            "$ref": "#/components/schemas/HumanReadableId"
+          },
+          "version": {
+            "type": "string"
+          },
+          "lastUpdate": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "type": {
+            "type": "string"
+          },
+          "productType": {
+            "type": "string"
+          },
+          "productSubType": {
+            "type": "string"
+          },
+          "productSpecCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSpecification"
+            }
+          },
+          "entityActionAssociation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSpecification"
+            }
+          },
+          "productSpecificationRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          },
+          "serviceSpecification": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          },
+          "resourceSpecification": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          },
+          "contractSpecification": {
+            "$ref": "#/components/schemas/EntityReference"
+          }
+        }
+      },
+      "Reason": {
+        "properties": {
+          "LifeCycleStateReason": {
+            "type": "string"
+          }
+        }
+      },
+      "RecurrencePeriod": {
+        "properties": {
+          "periodType": {
+            "type": "string"
+          },
+          "periodLength": {
+            "type": "number"
+          }
+        }
+      },
+      "ReferenceListEntity": {
+        "properties": {
+          "filterExpression": {
+            "type": "string"
+          },
+          "refernceListId": {
+            "type": "string"
+          }
+        }
+      },
+      "RelatedEntity": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "role": {
+            "type": "string"
+          },
+          "interactionRole": {
+            "type": "string"
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          }
+        }
+      },
+      "RelatedPartyRef": {
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "partyRoleRef": {
+            "type": "string"
+          },
+          "partyRoleType": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          }
+        }
+      },
+      "ShoppingCart": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdByChannel": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "lastUpdatedDate": {
+            "type": "string"
+          },
+          "completionDate": {
+            "type": "string"
+          },
+          "lastUpdatedByChannel": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "interactionPhase": {
+            "type": "string"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapElement"
+            }
+          },
+          "contextParameter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapElement"
+            }
+          },
+          "catalogContext": {
+            "$ref": "#/components/schemas/CatalogDiscovery"
+          },
+          "error": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemError"
+            }
+          },
+          "cartItem": {
+            "type": "array",
+            "items": {}
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedPartyRef"
+            }
+          },
+          "relatedBusinessInteraction": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityAssociation"
+            }
+          },
+          "contactMedium": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TMFContactMedium"
+            }
+          }
+        },
+        "example": {
+          "id": "f1574a61-b87b-4a0a-a533-95848f5b0003",
+          "href": "/cpi/shoppingCartManagement/v1/shoppingCart/f1574a61-b87b-4a0a-a533-95848f5b0003",
+          "createdBy": "Unknown=Unknown",
+          "createdDate": "2017-12-20T12:39:20.848-05:00",
+          "updatedBy": "Unknown=Unknown",
+          "lastUpdatedDate": "2018-02-16T15:49:32.852-05:00",
+          "status": "OPEN.BUILD",
+          "interactionPhase": "Quote",
+          "contextParameters": [
+            {
+              "name": "com.ericsson.bss.cpi.bi.cartid",
+              "value": "e40cac02-135a-11e8-b405-ae79c9a423dc"
+            },
+            {
+              "name": "com.ericsson.bss.cpi.bi.info.lastupdateresult",
+              "value": [
+                {
+                  "href": "/cpi/orchestration/v1/bi/f1574a61-b87b-4a0a-a533-95848f5b0003/biItem/f708a84b-3022-4080-b1c6-3ccda1d562b8",
+                  "method": "POST",
+                  "actor": "Client"
+                },
+                {
+                  "href": "/cpi/orchestration/v1/bi/f1574a61-b87b-4a0a-a533-95848f5b0003/biItem/d278634a-cd9a-48c7-9467-f6267917cd9d",
+                  "method": "POST",
+                  "actor": "Server"
+                }
+              ]
+            }
+          ],
+          "cartItem": [
+            {
+              "action": "add",
+              "type": "ProductItem",
+              "quantity": 1,
+              "status": "ProductCreated",
+              "productOffering": {
+                "href": "/cpi/discovery/v1/catalog/default/productOffering/018ba87f4d165a55bbb6c228ec2ec17a",
+                "id": "e42452b8-135a-11e8-b405-ae79c9a423dc"
+              },
+              "product": {
+                "href": "/cpi/discovery/v1/catalog/default/productOffering/018ba87f4d165a55bbb6c228ec2ec17a",
+                "id": "e42452b8-135a-11e8-b405-ae79c9a423dc",
+                "statuses": [
+                  {
+                    "status": "ProductActive",
+                    "validFor": {
+                      "startDateTime": "2018-02-16T20:49:33.020Z"
+                    }
+                  }
+                ],
+                "entityAction": {
+                  "action": "ADD",
+                  "validFor": {
+                    "startDateTime": "2018-02-16T20:49:33.020Z"
+                  },
+                  "currentLifeCycleState": "ProductCreated"
+                },
+                "characteristic": [
+                  {
+                    "id": "isComposite",
+                    "name": "isComposite",
+                    "value": "0",
+                    "charSpecRef": "isComposite",
+                    "configurable": false,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "value": "0",
+                            "isDiscrete": false
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "psPolicyRefs",
+                    "name": "psPolicyRefs",
+                    "value": "a36898ed5de844228c53dd23bcee4f5f,3ed564846fc141ae8c6e1da3a7304784",
+                    "charSpecRef": "psPolicyRefs",
+                    "configurable": false,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "value": "a36898ed5de844228c53dd23bcee4f5f,3ed564846fc141ae8c6e1da3a7304784",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "shared",
+                    "name": "shared",
+                    "value": "0",
+                    "charSpecRef": "shared",
+                    "configurable": true,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "value": "0",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "UI_METADATA",
+                    "name": "UI_METADATA",
+                    "value": "{\"stateName\":\"po-select-category\",\"stateParams\":{\"taskState\":\"my-tasks\",\"taskId\":\"6\",\"taskName\":\"Create PO\",\"orderId\":\"181394\",\"project\":\"PLD_181393\",\"projectName\":\"BL Voice\",\"createdDate\":\"2018-01-11T19:34:28.000Z\",\"poEffectiveToDate\":\"\",\"poEffectiveDate\":\"2018-01-12T16:49:00.000Z\",\"itemId\":\"018ba87f4d165a55bbb6c228ec2ec17a\",\"flow\":\"new\",\"entityType\":\"poEntity\",\"selectedEntity\":\"3ba1a98870384bee99e8b90a573c8fdf\",\"ps\":\"3ba1a98870384bee99e8b90a573c8fdf\",\"entityState\":\"DEF\"},\"completed\":[\"po-select-existing\",\"po-general-information\",\"po-offer-prices\",\"po-select-category\"]}",
+                    "charSpecRef": "UI_METADATA",
+                    "configurable": false,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "value": "{\"stateName\":\"po-select-category\",\"stateParams\":{\"taskState\":\"my-tasks\",\"taskId\":\"6\",\"taskName\":\"Create PO\",\"orderId\":\"181394\",\"project\":\"PLD_181393\",\"projectName\":\"BL Voice\",\"createdDate\":\"2018-01-11T19:34:28.000Z\",\"poEffectiveToDate\":\"\",\"poEffectiveDate\":\"2018-01-12T16:49:00.000Z\",\"itemId\":\"018ba87f4d165a55bbb6c228ec2ec17a\",\"flow\":\"new\",\"entityType\":\"poEntity\",\"selectedEntity\":\"3ba1a98870384bee99e8b90a573c8fdf\",\"ps\":\"3ba1a98870384bee99e8b90a573c8fdf\",\"entityState\":\"DEF\"},\"completed\":[\"po-select-existing\",\"po-general-information\",\"po-offer-prices\",\"po-select-category\"]}",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "activeStartMethod",
+                    "name": "activeStartMethod",
+                    "value": "trafficIndependent",
+                    "charSpecRef": "activeStartMethod",
+                    "configurable": false,
+                    "mandatory": true,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "charValueRef": "trafficindependent",
+                            "value": "trafficIndependent",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "productSpecificationTypes",
+                    "name": "productSpecificationTypes",
+                    "value": "BASE",
+                    "charSpecRef": "productSpecificationTypes",
+                    "configurable": true,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "value": "BASE",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "acceptancePeriodExpWarnTimeAdvM",
+                    "name": "acceptancePeriodExpWarnTimeAdvM",
+                    "value": "Duration",
+                    "charSpecRef": "acceptancePeriodExpWarnTimeAdvM",
+                    "configurable": false,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "charValueRef": "duration",
+                            "value": "Duration",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "activePeriodExpWarTimeAdvanceM",
+                    "name": "activePeriodExpWarTimeAdvanceM",
+                    "value": "Duration",
+                    "charSpecRef": "activePeriodExpWarTimeAdvanceM",
+                    "configurable": false,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "charValueRef": "duration",
+                            "value": "Duration",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "firstUsageAcceptancePeriodLengtM",
+                    "name": "firstUsageAcceptancePeriodLengtM",
+                    "value": "Duration",
+                    "charSpecRef": "firstUsageAcceptancePeriodLengtM",
+                    "configurable": false,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "charValueRef": "duration",
+                            "value": "Duration",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "activePeriodM",
+                    "name": "activePeriodM",
+                    "value": "Duration",
+                    "charSpecRef": "activePeriodM",
+                    "configurable": false,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "charValueRef": "duration",
+                            "value": "Duration",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "versionIdentifier",
+                    "name": "versionIdentifier",
+                    "value": "1515768649461",
+                    "charSpecRef": "versionIdentifier",
+                    "configurable": true,
+                    "mandatory": false,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "value": "1515768649461",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "charPriority",
+                    "name": "charPriority",
+                    "value": "medium",
+                    "charSpecRef": "charPriority",
+                    "configurable": false,
+                    "mandatory": true,
+                    "hidden": false,
+                    "personalized": false,
+                    "valueInstances": [
+                      {
+                        "values": [
+                          {
+                            "charValueRef": "medium",
+                            "value": "medium",
+                            "isDiscrete": true
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "cartItemRelationship": [
+                {
+                  "id": "d278634a-cd9a-48c7-9467-f6267917cd9d",
+                  "href": "/cpi/orchestration/v1/bi/f1574a61-b87b-4a0a-a533-95848f5b0003/biItem/d278634a-cd9a-48c7-9467-f6267917cd9d",
+                  "role": "subscribesTo"
+                },
+                {
+                  "id": "e4c01d89-135a-11e8-b405-ae79c9a423dc",
+                  "type": "TechnicalContractSpec",
+                  "role": "TechnicalContractSpec"
+                }
+              ],
+              "services": [
+                {
+                  "id": "e4d3cc9d-135a-11e8-b405-ae79c9a423dc",
+                  "characteristic": [
+                    {
+                      "id": "specificationSubType",
+                      "name": "specificationSubType",
+                      "value": "BASE",
+                      "charSpecRef": "specificationSubType",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "BASE",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "isComposite",
+                      "name": "isComposite",
+                      "value": "0",
+                      "charSpecRef": "isComposite",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "0",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "versionIdentifier",
+                      "name": "versionIdentifier",
+                      "value": "1516292603940",
+                      "charSpecRef": "versionIdentifier",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "1516292603940",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "statuses": [
+                    {
+                      "status": "ServiceActive",
+                      "validFor": {
+                        "startDateTime": "2018-02-16T20:49:33.020Z"
+                      }
+                    }
+                  ],
+                  "entityAction": {
+                    "action": "ADD",
+                    "validFor": {
+                      "startDateTime": "2018-02-16T20:49:33.020Z"
+                    },
+                    "currentLifeCycleState": "ServiceCreated"
+                  },
+                  "serviceType": "CF",
+                  "serviceSpecification": "/cpi/discovery/v1/catalog/default/serviceSpecification/b1e5cf7c-4a89-4919-9512-b8359c3edc8d",
+                  "services": [
+                    "e4f53750-135a-11e8-b405-ae79c9a423dc",
+                    "e516f026-135a-11e8-b405-ae79c9a423dc"
+                  ]
+                },
+                {
+                  "id": "e516f026-135a-11e8-b405-ae79c9a423dc",
+                  "characteristic": [
+                    {
+                      "id": "provisioningSystem",
+                      "name": "provisioningSystem",
+                      "value": "CPM",
+                      "charSpecRef": "provisioningSystem",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "CPM",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "specificationSubType",
+                      "name": "specificationSubType",
+                      "value": "BASE",
+                      "charSpecRef": "specificationSubType",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "BASE",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "isComposite",
+                      "name": "isComposite",
+                      "value": "0",
+                      "charSpecRef": "isComposite",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "0",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "versionIdentifier",
+                      "name": "versionIdentifier",
+                      "value": "1516293106658",
+                      "charSpecRef": "versionIdentifier",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "1516293106658",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "statuses": [
+                    {
+                      "status": "ServiceActive",
+                      "validFor": {
+                        "startDateTime": "2018-02-16T20:49:33.020Z"
+                      }
+                    }
+                  ],
+                  "entityAction": {
+                    "action": "ADD",
+                    "validFor": {
+                      "startDateTime": "2018-02-16T20:49:33.020Z"
+                    },
+                    "currentLifeCycleState": "ServiceCreated"
+                  },
+                  "serviceType": "RF",
+                  "serviceSpecification": "/cpi/discovery/v1/catalog/default/serviceSpecification/35337356-b4dc-4b04-a725-8d71b4874e72",
+                  "resources": [
+                    "e501ba73-135a-11e8-b405-ae79c9a423dc"
+                  ]
+                },
+                {
+                  "id": "e4f53750-135a-11e8-b405-ae79c9a423dc",
+                  "characteristic": [
+                    {
+                      "id": "provisioningSystem",
+                      "name": "provisioningSystem",
+                      "value": "CPM",
+                      "charSpecRef": "provisioningSystem",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "CPM",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "specificationSubType",
+                      "name": "specificationSubType",
+                      "value": "BASE",
+                      "charSpecRef": "specificationSubType",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "BASE",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "isComposite",
+                      "name": "isComposite",
+                      "value": "0",
+                      "charSpecRef": "isComposite",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "0",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "specificationSubSubtype",
+                      "name": "specificationSubSubtype",
+                      "value": "VOICE",
+                      "charSpecRef": "specificationSubSubtype",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "VOICE",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "versionIdentifier",
+                      "name": "versionIdentifier",
+                      "value": "1515518285699",
+                      "charSpecRef": "versionIdentifier",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "1515518285699",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "statuses": [
+                    {
+                      "status": "ServiceActive",
+                      "validFor": {
+                        "startDateTime": "2018-02-16T20:49:33.020Z"
+                      }
+                    }
+                  ],
+                  "entityAction": {
+                    "action": "ADD",
+                    "validFor": {
+                      "startDateTime": "2018-02-16T20:49:33.020Z"
+                    },
+                    "currentLifeCycleState": "ServiceCreated"
+                  },
+                  "serviceType": "RF",
+                  "serviceSpecification": "/cpi/discovery/v1/catalog/default/serviceSpecification/403b76c0-7dd8-4d74-b4d1-f73f2c6d69f1",
+                  "resources": [
+                    "e501ba73-135a-11e8-b405-ae79c9a423dc"
+                  ]
+                }
+              ],
+              "resources": [
+                {
+                  "id": "e501ba73-135a-11e8-b405-ae79c9a423dc",
+                  "characteristic": [
+                    {
+                      "id": "versionIdentifier",
+                      "name": "versionIdentifier",
+                      "value": "1515526192632",
+                      "charSpecRef": "versionIdentifier",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "1515526192632",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "numberingScheme",
+                      "name": "numberingScheme",
+                      "value": "E.164",
+                      "charSpecRef": "numberingScheme",
+                      "configurable": false,
+                      "mandatory": false,
+                      "hidden": false,
+                      "personalized": false,
+                      "valueInstances": [
+                        {
+                          "values": [
+                            {
+                              "value": "E.164",
+                              "isDiscrete": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "statuses": [
+                    {
+                      "status": "ResourceActive",
+                      "validFor": {
+                        "startDateTime": "2018-02-16T20:49:33.020Z"
+                      }
+                    }
+                  ],
+                  "entityAction": {
+                    "action": "ADD",
+                    "validFor": {
+                      "startDateTime": "2018-02-16T20:49:33.020Z"
+                    },
+                    "currentLifeCycleState": "ResourceCreated"
+                  },
+                  "resourceType": "L",
+                  "resourceSubType": "E.164",
+                  "resourceRole": "CommunicationID",
+                  "resourceSpecification": "/cpi/discovery/v1/catalog/default/resourceSpecification/55be0aa4-a00b-4e20-a9da-f0b69fb3e8b1"
+                }
+              ],
+              "id": "f708a84b-3022-4080-b1c6-3ccda1d562b8",
+              "entityId": "e42452b8-135a-11e8-b405-ae79c9a423dc",
+              "href": "/cpi/shoppingCartManagement/v1/shoppingCart/f1574a61-b87b-4a0a-a533-95848f5b0003/cartItem/f708a84b-3022-4080-b1c6-3ccda1d562b8",
+              "createdBy": "Unknown=Unknown",
+              "createdDate": "2018-02-16T15:49:32.852-05:00",
+              "updatedBy": "Unknown=Unknown",
+              "lastUpdatedDate": "2018-02-16T15:49:32.852-05:00"
+            },
+            {
+              "action": "add",
+              "type": "ContractItem",
+              "contractSpecification": "/cpi/discovery/v1/catalog/default/contractSpecification/MobileTechnicalContract",
+              "paymentContext": "Prepaid",
+              "statuses": [
+                {
+                  "status": "ContractActive",
+                  "validFor": {
+                    "startDateTime": "2018-02-16T20:49:33.020Z"
+                  }
+                }
+              ],
+              "entityAction": {
+                "action": "ADD",
+                "validFor": {
+                  "startDateTime": "2018-02-16T20:49:33.020Z"
+                },
+                "currentLifeCycleState": "ContractCreated"
+              },
+              "id": "d278634a-cd9a-48c7-9467-f6267917cd9d",
+              "entityId": "e4c01d89-135a-11e8-b405-ae79c9a423dc",
+              "href": "/cpi/shoppingCartManagement/v1/shoppingCart/f1574a61-b87b-4a0a-a533-95848f5b0003/cartItem/d278634a-cd9a-48c7-9467-f6267917cd9d",
+              "createdBy": "Unknown=Unknown",
+              "createdDate": "2018-02-16T15:49:32.852-05:00",
+              "updatedBy": "Unknown=Unknown",
+              "lastUpdatedDate": "2018-02-16T15:49:32.852-05:00",
+              "characteristics": [
+                {
+                  "id": "PaymentContext",
+                  "name": "PaymentContext",
+                  "value": "PREPAID",
+                  "charSpecRef": "PaymentContext",
+                  "configurable": true,
+                  "mandatory": false,
+                  "hidden": false,
+                  "personalized": false,
+                  "valueInstances": [
+                    {
+                      "values": [
+                        {
+                          "value": "PREPAID",
+                          "isDiscrete": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "prepaidLifeCycleData",
+                  "name": "prepaidLifeCycleData",
+                  "charSpecRef": "prepaidLifeCycleData",
+                  "configurable": true,
+                  "mandatory": false,
+                  "hidden": false,
+                  "personalized": false,
+                  "valueInstances": [
+                    {
+                      "comprisedOf": [
+                        {
+                          "id": "prepaidLifeCycleSpecId",
+                          "name": "prepaidLifeCycleSpecId",
+                          "value": "PPLC01",
+                          "charSpecRef": "prepaidLifeCycleSpecId",
+                          "configurable": true,
+                          "mandatory": false,
+                          "hidden": false,
+                          "personalized": false,
+                          "valueInstances": [
+                            {
+                              "values": [
+                                {
+                                  "value": "PPLC01",
+                                  "isDiscrete": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "specificationSubtype",
+                  "name": "specificationSubtype",
+                  "value": "subscription",
+                  "charSpecRef": "specificationSubtype",
+                  "configurable": true,
+                  "mandatory": false,
+                  "hidden": false,
+                  "personalized": false,
+                  "valueInstances": [
+                    {
+                      "values": [
+                        {
+                          "value": "subscription",
+                          "isDiscrete": true
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "family",
+                  "name": "family",
+                  "value": "mobile",
+                  "charSpecRef": "family",
+                  "configurable": true,
+                  "mandatory": false,
+                  "hidden": false,
+                  "personalized": false,
+                  "valueInstances": [
+                    {
+                      "values": [
+                        {
+                          "value": "mobile",
+                          "isDiscrete": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Customer",
+              "partyRoleRef": "/cpi/holisticView/v1/customer/F7525AD0F86E478AA600595B3D4B3C3C",
+              "partyRoleType": "/cpi/schemas/Customer.json"
+            }
+          ],
+          "mode": "interactive"
+        }
+      },
+      "Status": {
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          }
+        }
+      },
+      "StatusValue": {
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/Reason"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        }
+      },
+      "TaskInputMandatoryNote": {
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
+      "TaskInputNote": {
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        }
+      },
+      "TMFContactMedium": {
+        "properties": {
+          "preffered": {
+            "type": "boolean"
+          },
+          "contactMediumRef": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          },
+          "characteristic": {
+            "$ref": "#/components/schemas/MediumCharacteristic"
+          }
+        }
+      },
+      "TMFContract": {
+        "properties": {
+          "contractSpecification": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "paymentContext": {
+            "type": "string"
+          },
+          "status": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Status"
+            }
+          },
+          "entityAction": {
+            "$ref": "#/components/schemas/EntityAction"
+          },
+          "productReference": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Href"
+            }
+          },
+          "resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Href"
+            }
+          },
+          "relatedProductOfferItem": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalAssociation"
+            }
+          },
+          "calendarEntry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalendarEntry"
+            }
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          }
+        }
+      },
+      "TMFPrice": {
+        "properties": {
+          "currencyCode": {
+            "type": "string"
+          },
+          "dutyFreeAmount": {
+            "$ref": "#/components/schemas/Money"
+          },
+          "percentage": {
+            "type": "number"
+          },
+          "taxIncludedAmount": {
+            "$ref": "#/components/schemas/Money"
+          }
+        }
+      },
+      "TMFTimePeriod": {
+        "required": [
+          "startDateTime"
+        ],
+        "properties": {
+          "startDateTime": {
+            "type": "string"
+          },
+          "endDateTime": {
+            "type": "string"
+          }
+        }
+      },
+      "TMFResource": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusValue"
+            }
+          },
+          "entityAction": {
+            "$ref": "#/components/schemas/EntityAction"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "resourceType": {
+            "type": "string"
+          },
+          "resourceSubType": {
+            "type": "string"
+          },
+          "resourceRole": {
+            "type": "string"
+          },
+          "resourceSpecification": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "resourceNumber": {
+            "type": "string"
+          },
+          "logicalResource": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      },
+      "TMFService": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "href": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "externalId": {
+            "$ref": "#/components/schemas/ExternalId"
+          },
+          "versionNumber": {
+            "type": "string"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TMFTimePeriod"
+          },
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Status"
+            }
+          },
+          "entityAction": {
+            "$ref": "#/components/schemas/EntityAction"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "serviceType": {
+            "type": "string"
+          },
+          "serviceSpecification": {
+            "$ref": "#/components/schemas/Href"
+          },
+          "service": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Href"
+            }
+          },
+          "relatedService": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Href"
+            }
+          },
+          "resource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Href"
+            }
+          }
+        }
+      },
+      "ThresholdValue": {
+        "properties": {
+          "characteristics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DecimalValue"
+            }
+          },
+          "thresholdSpecification": {
+            "type": "string"
+          }
+        }
+      },
+      "TimePeriod": {
+        "required": [
+          "start"
+        ],
+        "properties": {
+          "start": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
+          }
+        }
+      },
+      "UnitOfMeasure": {
+        "properties": {
+          "unit": {
+            "type": "string"
+          }
+        }
+      },
+      "UnresolvedEntity": {
+        "properties": {
+          "associationId": {
+            "type": "string"
+          },
+          "resolutionAction": {
+            "type": "string"
+          },
+          "spec": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "resolutionCardinality": {
+            "$ref": "#/components/schemas/Cardinality"
+          },
+          "possibleEntity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityReference"
+            }
+          }
+        }
+      },
+      "VersionedValue": {
+        "properties": {
+          "charValueRef": {
+            "type": "string"
+          },
+          "value": {},
+          "isDiscrete": {
+            "type": "boolean"
+          },
+          "unitOfMeasure": {
+            "$ref": "#/components/schemas/UnitOfMeasure"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        }
+      }
+    }
+  }
+}
